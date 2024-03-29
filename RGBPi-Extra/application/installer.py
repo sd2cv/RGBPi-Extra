@@ -1,9 +1,8 @@
 import os
-import tarfile
 import shutil
 import subprocess
-import urllib.request
 import pygame
+import tempfile
 
 def display_loading_screen(screen, font):
     screen.fill(BLACK)
@@ -30,23 +29,22 @@ branch = "main"
 path = "RGBPi-Extra"
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-archive_url = f"https://github.com/{repo_owner}/{repo_name}/archive/{branch}.tar.gz"
-archive_file = os.path.join(script_dir, f"{repo_name}-{branch}.tar.gz")
-urllib.request.urlretrieve(archive_url, archive_file)
 
-temp_dir = os.path.join(script_dir, "temp")
+# Create a temporary directory in the same location as the script
+temp_dir = os.path.join(script_dir, "rgbpitemp")
 os.makedirs(temp_dir, exist_ok=True)
-with tarfile.open(archive_file, "r:gz") as tar:
-    tar.extractall(path=temp_dir)
 
-source_dir = os.path.join(temp_dir, f"{repo_name}-{branch}", path)
+# Clone the repository into the temporary directory
+clone_cmd = ['git', 'clone', f'https://github.com/{repo_owner}/{repo_name}', '-b', branch, temp_dir]
+subprocess.run(clone_cmd, check=True)
+
+# Move the RGBPi-Extra directory and its contents outside the temporary directory
+source_dir = os.path.join(temp_dir, path)
 destination_dir = os.path.join(script_dir, path)
-if os.path.exists(destination_dir):
-    shutil.rmtree(destination_dir)
 shutil.move(source_dir, destination_dir)
 
+# Clean up the temporary directory
 shutil.rmtree(temp_dir)
-os.remove(archive_file)
 
 with subprocess.Popen(['df', '-P', script_dir], stdout=subprocess.PIPE) as proc:
     output = proc.stdout.readlines()
