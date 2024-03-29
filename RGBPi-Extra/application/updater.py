@@ -131,7 +131,7 @@ except Exception as e:
     pygame.quit()
     exit()
 
-temp_dir = os.path.join(grandparent_dir, "temp")
+temp_dir = os.path.join(grandparent_dir, "rgbpitemp")
 os.makedirs(temp_dir, exist_ok=True)
 with tarfile.open(archive_file, "r:gz") as tar:
     tar.extractall(path=temp_dir)
