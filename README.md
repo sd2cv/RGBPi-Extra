@@ -29,7 +29,11 @@ I have found new scripts made by other people and added them to this Repo. I don
 5. The RGBPi-Extra UI will appear allowing you to apply the patch and restart. 
 
 
-https://github.com/sd2cv/RGBPi-Extra/assets/99993735/b93bdd93-611d-447b-bbbc-c6718d749679
+
+
+https://github.com/sd2cv/RGBPi-Extra/assets/99993735/16954595-fd25-43ac-9414-904f6b6ab515
+
+
 
 
 ## Usage
@@ -63,7 +67,10 @@ To remove the patch open RGBPi-Extra ui, go to settings and select remove. This 
 # Systems still in progress, only checked cores are implemented. BIOS files are not included.
 
 
-https://github.com/sd2cv/RGBPi-Extra/assets/99993735/299e54a7-49aa-4ab0-867a-3126dff5cc3f
+
+
+https://github.com/sd2cv/RGBPi-Extra/assets/99993735/1b75acd4-bfe8-4d95-8eb5-8481741fbc86
+
 
 
 If there is a [X] that means it Installs and Plays. 
