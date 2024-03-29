@@ -26,7 +26,7 @@ display_loading_screen(screen, font)
 
 repo_owner = "sd2cv"
 repo_name = "RGBPi-Extra"
-branch = "master"
+branch = "main"
 path = "RGBPi-Extra"
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
