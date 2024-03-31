@@ -1,4 +1,5 @@
 #!/bin/bash
+set -o pipefail
 timedatectl set-timezone UTC
 timedatectl set-ntp true
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
