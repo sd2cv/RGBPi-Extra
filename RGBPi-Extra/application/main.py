@@ -43,7 +43,7 @@ menu_theme.scrollbar_slider_color = (0, 0, 0, 255)
 menu_theme.scrollbar_thick = (5)
 
 menu = pygame_menu.Menu(
-    title='RGBPi Extra v.11a',
+    title='RGBPi Extra v.12a',
     theme=menu_theme,
     joystick_enabled=True,
     width=WINDOW_SIZE[0],
