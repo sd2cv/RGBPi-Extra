@@ -50,7 +50,7 @@ menu = pygame_menu.Menu(
     height=WINDOW_SIZE[1],
     mouse_visible_update=False,
 )
-#Makes TweaksUI autoclose in 120 seconds
+#Makes TweaksUI autoclose
 idle_timeout = 960 #seconds
 last_input_time = pygame.time.get_ticks()
 
@@ -72,17 +72,10 @@ def apply_patch():
     try:
         shutil.move(os.path.join(RGBPI_UI_ROOT, 'launcher.pyc'), os.path.join(RGBPI_UI_ROOT, 'launcher2.pyc'))
         shutil.copy('data/launcher.py', os.path.join(RGBPI_UI_ROOT, 'launcher.py'))
-        
-        # Copying files from data/tweaks to /opt/rgbpi/ui/tweaks
         shutil.copytree('data/tweaks', os.path.join(RGBPI_UI_ROOT, 'tweaks'), dirs_exist_ok=True)
-        
-        # Copying files from data/shaders to /root/.config/retroarch/shaders
         shutil.copytree('data/shaders', '/root/.config/retroarch/shaders', dirs_exist_ok=True)
-        
-        # Copying files from data/cores to /opt/retroarch/cores
         shutil.copytree('data/cores', '/opt/retroarch/cores', dirs_exist_ok=True)
                 
-        # Append data from data/cores.cfg to /opt/rgbpi/ui/data/cores.cfg
         with open('data/cores.cfg', 'r') as source_file:
             data_to_append = source_file.read()
         with open('/opt/rgbpi/ui/data/cores.cfg', 'r+') as dest_file:
@@ -95,7 +88,7 @@ def apply_patch():
             dest_file.truncate()
         
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        drive = script_dir.split(os.sep)[2]  # Extract the drive from the script path
+        drive = script_dir.split(os.sep)[2]
         media_mountpoint = os.path.join('/', 'media', drive)
 
         source_dir = os.path.join(os.path.dirname(__file__), 'data', 'drive')
@@ -106,14 +99,18 @@ def apply_patch():
             file.seek(0)
             for line in lines:
                 file.write(line)
-                if line.startswith('"arcade"'):
-                    file.write('"atari800","Atari 800",1979,"Atari",".a26|.rom|.zip|.7z|.sh",\n')
                 if line.startswith('"sega32x"'):
                     file.write('"saturn","Sega Saturn",1994,"Sega",".cue|.iso|.ccd|.mds|.chd|.sh",\n')
                 elif line.startswith('"psx"'):
                     file.write('"psp","Sony PSP",2005,"Sony",".elf|.iso|.cso|.prx|.pbp|.chd|.sh",\n')
                 elif line.startswith('"gba"'):
                     file.write('"nds","Nintendo DS",2004,"Nintendo",".nds|.ids|.dsi|.sh",\n')
+                elif line.startswith('"sgb"'):
+                    file.write('"vb","Virtual Boy",1995,"Nintendo",".vb|.zip|.7z",\n')
+                elif line.startswith('"zxspectrum"'):
+                    file.write('"tic80","TIC-80",2017,"Nesbox",".tic|.sh",\n')
+                elif line.startswith('"atari2600"'):
+                    file.write('"atari5200","Atari 5200",1982,"Atari",".a26|.rom|.zip|.7z|.sh",\n')                    
         
         os.system('reboot')
     except Exception as e:
@@ -165,4 +162,7 @@ if __name__ == '__main__':
             current_time = pygame.time.get_ticks()
             if current_time - last_input_time > idle_timeout * 1000:
                 exit()
+        else:
+            break 
         pygame.display.update()
+exit()

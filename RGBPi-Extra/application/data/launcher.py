@@ -45,7 +45,7 @@ l2.make_common = make_common
 launch_content2 = l2.launch_content
 
 def launch_content():
-    supported_systems = ('saturn', 'psp', 'nds',)
+    supported_systems = ('saturn', 'psp', 'nds', 'tic80', 'vb', 'atari5200',)
     if cglobals.launcher['system'] not in supported_systems:
         return launch_content2()
 
@@ -117,6 +117,12 @@ def launch_content():
             if '.sh' in game_path:
                 launch_command = '"' + game_path + '"'
                 utils.cmd('chmod +x ' + launch_command)
+            elif system == 'atari5200':
+                launch_command = path_retroarch + color_cmd + device_cmd + netplay_cmd + ' -L ' + path_cores + '/atari800_libretro.so --appendconfig=' + retroarch_cfg_file + ' "' + game_path + '"'   
+            elif system == 'vb':
+                launch_command = path_retroarch + color_cmd + device_cmd + netplay_cmd + ' -L ' + path_cores + '/mednafen_vb_libretro.so --appendconfig=' + retroarch_cfg_file + ' "' + game_path + '"'   
+            elif system == 'tic80':
+                launch_command = path_retroarch + color_cmd + device_cmd + netplay_cmd + ' -L ' + path_cores + '/tic80_libretro.so --appendconfig=' + retroarch_cfg_file + ' "' + game_path + '"'   
             elif system == 'saturn':
                 launch_command = path_retroarch + color_cmd + device_cmd + netplay_cmd + ' -L ' + path_cores + '/yabasanshiro_libretro.so --appendconfig=' + retroarch_cfg_file + ' "' + game_path + '"'              
             elif system == 'psp':
