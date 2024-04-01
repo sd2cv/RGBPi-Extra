@@ -138,7 +138,7 @@ def load_menu(error=None):
                 retroarch_settings_menu = get_retroarch_settings_menu(menu_theme, WINDOW_SIZE)
                 rgbpi_tweaks_menu = get_rgbpi_tweaks_menu(menu_theme, WINDOW_SIZE)
                 menu.add.button('Retroarch Settings', retroarch_settings_menu)
-                menu.add.button('Update Cores', get_core_updates_menu(menu_theme, WINDOW_SIZE))
+                menu.add.button('Update Cores (experimental)', get_core_updates_menu(menu_theme, WINDOW_SIZE))
                 menu.add.button('Tweaks', rgbpi_tweaks_menu)
                 settings_menu = get_tweaks_settings_menu(menu_theme, WINDOW_SIZE)
                 menu.add.button('Settings', settings_menu)
